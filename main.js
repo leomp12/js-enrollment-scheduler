@@ -330,7 +330,10 @@ let disciplinas = [
     'inicio': '07:40',
     'fim': '10:25',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Angiologia',
@@ -338,7 +341,10 @@ let disciplinas = [
     'inicio': '07:40',
     'fim': '10:25',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Gastro',
@@ -346,7 +352,10 @@ let disciplinas = [
     'inicio': '07:40',
     'fim': '10:25',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Gastro',
@@ -354,7 +363,10 @@ let disciplinas = [
     'inicio': '16:45',
     'fim': '19:30',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Geriatria',
@@ -362,7 +374,10 @@ let disciplinas = [
     'inicio': '07:40',
     'fim': '10:25',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Geriatria',
@@ -370,7 +385,10 @@ let disciplinas = [
     'inicio': '10:25',
     'fim': '13:10',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Geriatria',
@@ -378,7 +396,10 @@ let disciplinas = [
     'inicio': '09:35',
     'fim': '12:05',
     'local': '1',
-    'turma': 'C'
+    'turma': 'C',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Geriatria',
@@ -386,7 +407,10 @@ let disciplinas = [
     'inicio': '09:35',
     'fim': '12:05',
     'local': '1',
-    'turma': 'D'
+    'turma': 'D',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Geriatria',
@@ -394,7 +418,10 @@ let disciplinas = [
     'inicio': '10:25',
     'fim': '13:10',
     'local': '1',
-    'turma': 'E'
+    'turma': 'E',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Ortopedia',
@@ -402,7 +429,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Ortopedia',
@@ -410,7 +440,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Otorrino',
@@ -418,7 +451,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Otorrino',
@@ -426,7 +462,10 @@ let disciplinas = [
     'inicio': '15:55',
     'fim': '18:40',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Urologia',
@@ -434,7 +473,10 @@ let disciplinas = [
     'inicio': '09:35',
     'fim': '12:05',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Urologia',
@@ -442,7 +484,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Reumato',
@@ -450,7 +495,10 @@ let disciplinas = [
     'inicio': '07:40',
     'fim': '10:25',
     'local': '1',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Reumato',
@@ -458,7 +506,10 @@ let disciplinas = [
     'inicio': '16:45',
     'fim': '19:30',
     'local': '1',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 8,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -466,7 +517,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -474,7 +528,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -482,7 +539,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '16:45',
     'local': '2',
-    'turma': 'C'
+    'turma': 'C',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -490,7 +550,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'D'
+    'turma': 'D',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -498,7 +561,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'E'
+    'turma': 'E',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -506,7 +572,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '16:45',
     'local': '2',
-    'turma': 'F'
+    'turma': 'F',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -514,7 +583,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '16:45',
     'local': '2',
-    'turma': 'G'
+    'turma': 'G',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -522,7 +594,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'H'
+    'turma': 'H',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Ginecologia',
@@ -530,7 +605,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '15:55',
     'local': '2',
-    'turma': 'I'
+    'turma': 'I',
+    'min': 5,
+    'max': 5,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -538,7 +616,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '17:35',
     'local': '3',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -546,7 +627,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '3',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -554,7 +638,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '3',
-    'turma': 'C'
+    'turma': 'C',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -562,7 +649,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '3',
-    'turma': 'D'
+    'turma': 'D',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -570,7 +660,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '3',
-    'turma': 'E'
+    'turma': 'E',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Pediatria',
@@ -578,7 +671,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '3',
-    'turma': 'F'
+    'turma': 'F',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -586,7 +682,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '4',
-    'turma': 'A'
+    'turma': 'A',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -594,7 +693,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '17:35',
     'local': '4',
-    'turma': 'B'
+    'turma': 'B',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -602,7 +704,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '4',
-    'turma': 'C'
+    'turma': 'C',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -610,7 +715,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '4',
-    'turma': 'D'
+    'turma': 'D',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -618,7 +726,10 @@ let disciplinas = [
     'inicio': '14:00',
     'fim': '17:35',
     'local': '4',
-    'turma': 'E'
+    'turma': 'E',
+    'min': 7,
+    'max': 8,
+    'num': 0
   },
   {
     'disciplina': 'Clinica',
@@ -626,7 +737,10 @@ let disciplinas = [
     'inicio': '13:10',
     'fim': '16:45',
     'local': '4',
-    'turma': 'F'
+    'turma': 'F',
+    'min': 7,
+    'max': 8,
+    'num': 0
   }
 ]
 
@@ -694,6 +808,22 @@ for (let i = 0; i < disciplinas.length; i++) {
   }
 }
 
+let adiciona = function (nome, disciplina, preferencia) {
+  // adiciona horario
+  if (!horarios.hasOwnProperty(nome)) {
+    horarios[nome] = []
+  }
+
+  let el = Object.assign({
+    'bateu': 0,
+    'troca': false,
+    'pre': preferencia
+  }, disciplina)
+  horarios[nome].push(el)
+
+  disciplina.num++
+}
+
 // joga alunos nas disciplinas
 for (let i = 0; i < alunos.length; i++) {
   let aluno = alunos[i]
@@ -706,11 +836,7 @@ for (let i = 0; i < alunos.length; i++) {
         // checa preferencia
         let turma = aluno.alunos[nome]
         if (turma === '' || turma === disciplina.turma) {
-          // adiciona horario
-          if (!horarios.hasOwnProperty(nome)) {
-            horarios[nome] = []
-          }
-          horarios[nome].push(disciplina)
+          adiciona(nome, disciplina, false)
         } else {
           // buscar turma selecionada
           let achei = false
@@ -718,11 +844,7 @@ for (let i = 0; i < alunos.length; i++) {
           for (let i = 0; i < disciplinas.length; i++) {
             let disciplina = disciplinas[i]
             if (aluno.disciplina === disciplina.disciplina && turma === disciplina.turma) {
-              // adiciona horario
-              if (!horarios.hasOwnProperty(nome)) {
-                horarios[nome] = []
-              }
-              horarios[nome].push(disciplina)
+              adiciona(nome, disciplina, true)
 
               achei = true
               break
@@ -750,6 +872,7 @@ for (let i = 0; i < alunos.length; i++) {
 for (let nome in horarios) {
   if (horarios.hasOwnProperty(nome)) {
     let horario = horarios[nome]
+
     for (let i = 0; i < horario.length; i++) {
       for (let j = 0; j < horario.length; j++) {
         if (i === j) {
@@ -758,6 +881,7 @@ for (let nome in horarios) {
           continue
         }
 
+        let bateu = false
         // testa dia e hora
         if (horario[i].dia === horario[j].dia) {
           // mesmo dia
@@ -767,10 +891,12 @@ for (let nome in horarios) {
 
           if (horario[i].inicio === horario[j].inicio || horario[i].fim === horario[j].fim) {
             // mesmo horario
+            bateu = true
           } else {
             if (horario[i].inicio > horario[j].inicio) {
               if (horario[j].fim > horario[i].inicio) {
                 // bate horario
+                bateu = true
               } else {
                 de = j
                 para = i
@@ -779,6 +905,7 @@ for (let nome in horarios) {
               // j comeca depois de i
               if (horario[i].fim > horario[j].inicio) {
                 // bate horario
+                bateu = true
               } else {
                 de = i
                 para = j
@@ -786,27 +913,65 @@ for (let nome in horarios) {
             }
           }
 
-          // nao bateu horario
-          // checa margem para transporte
-          if (horario[de].local !== horario[para].local) {
-            let achei = false
-            for (let i = 0; i < locais.length; i++) {
-              let local = locais[i]
-              if (local.de === horario[de].local && local.para === horario[para].local) {
-                if (horario[de].fim + local.minutos > horario[para].inicio) {
-                  // bate horario
+          if (!bateu) {
+            // nao bateu horario
+            // checa margem para transporte
+            if (horario[de].local !== horario[para].local) {
+              let achei = false
+              for (let i = 0; i < locais.length; i++) {
+                let local = locais[i]
+                if (local.de === horario[de].local && local.para === horario[para].local) {
+                  if (horario[de].fim + local.minutos > horario[para].inicio) {
+                    // bate horario
+                    bateu = true
+                  }
+                  achei = true
+                  break
                 }
-                achei = true
-                break
+              }
+
+              if (!achei) {
+                // bate horario
+                bateu = true
               }
             }
+          }
+        }
 
-            if (!achei) {
-              // bate horario
-            }
+        if (bateu) {
+          // console.log('bateu ' + nome + ' ' + i + ' ' + j)
+          if (!horario[i].pre) {
+            horario[i].bateu++
+          }
+          if (!horario[j].pre) {
+            horario[j].bateu++
           }
         }
       }
     }
   }
 }
+
+for (let nome in horarios) {
+  if (horarios.hasOwnProperty(nome)) {
+    let horario = horarios[nome]
+
+    let troca
+    for (let i = 0; i < horario.length; i++) {
+      if (troca === undefined) {
+        if (horario[i].bateu > 0) {
+          troca = i
+        }
+      } else {
+        if (horario[troca].bateu < horario[i].bateu) {
+          troca = i
+        }
+      }
+    }
+    if (troca !== undefined) {
+      horario[troca].troca = true
+    }
+  }
+}
+
+console.log(horarios)
