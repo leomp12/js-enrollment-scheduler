@@ -1,7 +1,7 @@
 {
   "name": "js-enrollment-scheduler",
   "version": "0.1.0",
-  "description": "JS script to find the possible solution for student enrollments",
+  "description": "JS to find possible solutions for student enrollments",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
