@@ -97,7 +97,7 @@ let alunos = [
       'Alessandra de Siqueira': '',
       'Thais Vianney': '',
       'Isadora Estevam': '',
-      'Maria Clara Chaves ': '',
+      'Maria Clara Chaves': '',
       'Thulio Magalhaes': '',
       'Lauro Silva': '',
       'Isabela Braun': '',
@@ -119,14 +119,14 @@ let alunos = [
       'Isadora Estevam': '',
       'Lauro Silva': '',
       'Leonardo Tavares': '',
-      'Luane Vargas ': '',
+      'Luane Vargas': '',
       'Bruna Moreira': '',
       'Criskelem Reis': '',
       'Ana Cristina Lobato': 'A',
       'Camila Magalhaes': '',
       'Patricia Pedra': '',
       'Debora Teixeira': '',
-      'Natana Nedejje': ''
+      'Natana Nadejje': ''
     }
   },
   {
@@ -140,7 +140,7 @@ let alunos = [
       'Alessandra de Siqueira': '',
       'Lucas Campos': '',
       'Julia Gomes': '',
-      'Vanessa Souza ': '',
+      'Vanessa Souza': '',
       'Clara Castro': '',
       'Guilherme Lemos': '',
       'Vinicius Viana': '',
@@ -161,7 +161,7 @@ let alunos = [
       'Mariana Lis': '',
       'Laura Alvares': '',
       'Alessandra de Siqueira': '',
-      'Bruna Almeida ': '',
+      'Bruna Almeida': '',
       'Wagner Mendes': '',
       'Thais Vianney': '',
       'Julia Wanderley': '',
@@ -194,7 +194,7 @@ let alunos = [
       'Julia Gomes': '',
       'Debora Teixeira': '',
       'Luciana Penna': 'G',
-      'Isadora Estevam ': '',
+      'Isadora Estevam': '',
       'Lauro Silva': '',
       'Andre Ribeiro': '',
       'Mariana Couto': '',
@@ -244,7 +244,7 @@ let alunos = [
       'Julia Gomes': '',
       'Debora Teixeira': '',
       'Luciana Penna': 'E',
-      'Isadora Estevam ': '',
+      'Isadora Estevam': '',
       'Lauro Silva': '',
       'Andre Ribeiro': '',
       'Mariana Couto': '',
@@ -294,7 +294,7 @@ let alunos = [
       'Julia Gomes': '',
       'Debora Teixeira': '',
       'Luciana Penna': '',
-      'Isadora Estevam ': '',
+      'Isadora Estevam': '',
       'Lauro Silva': '',
       'Andre Ribeiro': '',
       'Mariana Couto': '',
@@ -792,7 +792,7 @@ let locais = [
   }
 ]
 
-let horarios = {}
+let horarios = []
 
 // converte strings de horarios em minutos
 for (let i = 0; i < disciplinas.length; i++) {
@@ -804,22 +804,36 @@ for (let i = 0; i < disciplinas.length; i++) {
     let horas = parseInt(s[0])
     let minutos = parseInt(s[1])
     // salva por referencia
-    disciplina[x[i]] = horas * 60 + minutos
+    disciplina['n_' + x[i]] = horas * 60 + minutos
   }
 }
 
 let adiciona = function (nome, disciplina, preferencia) {
   // adiciona horario
-  if (!horarios.hasOwnProperty(nome)) {
-    horarios[nome] = []
+  let el
+  for (let i = 0; i < horarios.length; i++) {
+    if (horarios[i].nome === nome) {
+      el = i
+      break
+    }
+  }
+  if (el === undefined) {
+    el = horarios.length
+    horarios.push({
+      'nome': nome,
+      'horarios': []
+    })
   }
 
-  let el = Object.assign({
+  let obj = Object.assign({
     'bateu': 0,
     'troca': false,
     'pre': preferencia
   }, disciplina)
-  horarios[nome].push(el)
+  delete obj.num
+  delete obj.min
+  delete obj.max
+  horarios[el].horarios.push(obj)
 
   disciplina.num++
 }
@@ -827,134 +841,195 @@ let adiciona = function (nome, disciplina, preferencia) {
 // joga alunos nas disciplinas
 for (let i = 0; i < alunos.length; i++) {
   let aluno = alunos[i]
-  let achei = false
+  let turmas = []
 
+  // separa todas as turmas da disciplina
   for (let i = 0; i < disciplinas.length; i++) {
     let disciplina = disciplinas[i]
     if (aluno.disciplina === disciplina.disciplina) {
-      for (let nome in aluno.alunos) {
-        // checa preferencia
-        let turma = aluno.alunos[nome]
-        if (turma === '' || turma === disciplina.turma) {
-          adiciona(nome, disciplina, false)
+      turmas.push(i)
+    }
+  }
+
+  if (turmas.length === 0) {
+    throw new Error('disciplina invalida ' + aluno.disciplina)
+  } else {
+    // preferencias primeiro
+    for (let nome in aluno.alunos) {
+      let turma = aluno.alunos[nome]
+      if (turma !== '') {
+        // buscar turma selecionada
+        let achei = false
+
+        for (let i = 0; i < turmas.length; i++) {
+          let disciplina = disciplinas[turmas[i]]
+          if (turma === disciplina.turma) {
+            adiciona(nome, disciplina, true)
+
+            achei = true
+            break
+          }
+        }
+
+        if (!achei) {
+          throw new Error('turma invalida ' + turma + ', aluno ' + nome)
+        }
+      }
+    }
+
+    // outros alunos
+    for (let nome in aluno.alunos) {
+      let turma = aluno.alunos[nome]
+      if (turma === '') {
+        for (let i = 0; i < turmas.length; i++) {
+          let disciplina = disciplinas[turmas[i]]
+          if (disciplina.num < disciplina.min) {
+            adiciona(nome, disciplina, false)
+            break
+          } else if (disciplina.num < disciplina.max) {
+            // checa se alguma turma esta vazia
+            let achei = false
+
+            for (let i = 0; i < turmas.length; i++) {
+              let disciplina = disciplinas[turmas[i]]
+              if (disciplina.num < disciplina.min) {
+                adiciona(nome, disciplina, false)
+                achei = true
+                break
+              }
+            }
+
+            if (!achei) {
+              adiciona(nome, disciplina, false)
+            }
+            break
+          }
+        }
+      }
+    }
+  }
+}
+
+function bater (horario, i) {
+  let batidas = 0
+
+  for (let j = 0; j < horario.length; j++) {
+    if (i === j) {
+      // mesmo horario
+      // pula
+      continue
+    }
+
+    let bateu = false
+    // testa dia e hora
+    if (horario[i].dia === horario[j].dia) {
+      // mesmo dia
+      // checa horario
+      let de
+      let para
+
+      if (horario[i].n_inicio === horario[j].n_inicio || horario[i].n_fim === horario[j].n_fim) {
+        // mesmo horario
+        bateu = true
+      } else {
+        if (horario[i].n_inicio > horario[j].n_inicio) {
+          if (horario[j].n_fim > horario[i].n_inicio) {
+            // bate horario
+            bateu = true
+          } else {
+            de = j
+            para = i
+          }
         } else {
-          // buscar turma selecionada
+          // j comeca depois de i
+          if (horario[i].n_fim > horario[j].n_inicio) {
+            // bate horario
+            bateu = true
+          } else {
+            de = i
+            para = j
+          }
+        }
+      }
+
+      if (!bateu) {
+        // nao bateu horario
+        // checa margem para transporte
+        if (horario[de].local !== horario[para].local) {
           let achei = false
-
-          for (let i = 0; i < disciplinas.length; i++) {
-            let disciplina = disciplinas[i]
-            if (aluno.disciplina === disciplina.disciplina && turma === disciplina.turma) {
-              adiciona(nome, disciplina, true)
-
+          for (let i = 0; i < locais.length; i++) {
+            let local = locais[i]
+            if (local.de === horario[de].local && local.para === horario[para].local) {
+              if (horario[de].n_fim + local.minutos > horario[para].n_inicio) {
+                // bate horario
+                bateu = true
+              }
               achei = true
               break
             }
           }
 
           if (!achei) {
-            throw new Error('turma invalida ' + turma + ', aluno ' + nome)
+            // bate horario
+            bateu = true
           }
         }
       }
+    }
 
-      achei = true
-      break
+    if (bateu) {
+      // console.log('bateu ' + nome + ' ' + i + ' ' + j)
+      if (!horario[i].pre) {
+        horario[i].bateu++
+      }
+      /*
+      if (!horario[j].pre) {
+        horario[j].bateu++
+      }
+      */
+      batidas++
     }
   }
 
-  if (!achei) {
-    throw new Error('disciplina invalida ' + aluno.disciplina)
-  }
+  return batidas
 }
 
 // console.log(horarios)
 // checa horarions batendo
-for (let nome in horarios) {
-  if (horarios.hasOwnProperty(nome)) {
-    let horario = horarios[nome]
-
+function checar (trocar, trocado, forcar, n) {
+  // reset
+  for (let i = 0; i < horarios.length; i++) {
+    let horario = horarios[i].horarios
     for (let i = 0; i < horario.length; i++) {
-      for (let j = 0; j < horario.length; j++) {
-        if (i === j) {
-          // mesmo horario
-          // pula
-          continue
-        }
-
-        let bateu = false
-        // testa dia e hora
-        if (horario[i].dia === horario[j].dia) {
-          // mesmo dia
-          // checa horario
-          let de
-          let para
-
-          if (horario[i].inicio === horario[j].inicio || horario[i].fim === horario[j].fim) {
-            // mesmo horario
-            bateu = true
-          } else {
-            if (horario[i].inicio > horario[j].inicio) {
-              if (horario[j].fim > horario[i].inicio) {
-                // bate horario
-                bateu = true
-              } else {
-                de = j
-                para = i
-              }
-            } else {
-              // j comeca depois de i
-              if (horario[i].fim > horario[j].inicio) {
-                // bate horario
-                bateu = true
-              } else {
-                de = i
-                para = j
-              }
-            }
-          }
-
-          if (!bateu) {
-            // nao bateu horario
-            // checa margem para transporte
-            if (horario[de].local !== horario[para].local) {
-              let achei = false
-              for (let i = 0; i < locais.length; i++) {
-                let local = locais[i]
-                if (local.de === horario[de].local && local.para === horario[para].local) {
-                  if (horario[de].fim + local.minutos > horario[para].inicio) {
-                    // bate horario
-                    bateu = true
-                  }
-                  achei = true
-                  break
-                }
-              }
-
-              if (!achei) {
-                // bate horario
-                bateu = true
-              }
-            }
-          }
-        }
-
-        if (bateu) {
-          // console.log('bateu ' + nome + ' ' + i + ' ' + j)
-          if (!horario[i].pre) {
-            horario[i].bateu++
-          }
-          if (!horario[j].pre) {
-            horario[j].bateu++
-          }
-        }
-      }
+      // console.log('i')
+      horario[i].troca = false
+      horario[i].bateu = 0
     }
   }
-}
 
-for (let nome in horarios) {
-  if (horarios.hasOwnProperty(nome)) {
-    let horario = horarios[nome]
+  let batidas = 0
+  for (let i = 0; i < horarios.length; i++) {
+    let horario = horarios[i].horarios
+
+    for (let i = 0; i < horario.length; i++) {
+      batidas += bater(horario, i)
+    }
+  }
+
+  // console.log(batidas)
+  if (batidas === 0) {
+    console.log('FIM')
+    console.log(horarios)
+    return
+  } else if (batidas > 300) {
+    console.log('RUIM')
+    console.log(batidas)
+    console.log(horarios)
+    return
+  }
+
+  for (let i = 0; i < horarios.length; i++) {
+    let horario = horarios[i].horarios
 
     let troca
     for (let i = 0; i < horario.length; i++) {
@@ -972,6 +1047,105 @@ for (let nome in horarios) {
       horario[troca].troca = true
     }
   }
+
+  if (trocar !== false) {
+    if (n > 1000) {
+      console.log('LIMITE')
+      console.log(batidas)
+      for (let i = 0; i < horarios.length; i++) {
+        console.log(horarios[i].nome)
+        console.log(JSON.stringify(horarios[i].horarios, null, 2))
+      }
+      return
+    }
+
+    // tenta trocas
+    let trocas = 0
+    for (let i = 0; i < horarios.length; i++) {
+      let horario = horarios[i].horarios
+      let trocou = false
+
+      for (let i = 0; i < horario.length; i++) {
+        if (horario[i].troca) {
+          let troca = horario[i]
+
+          // procura outra turma
+          for (let i = 0; i < horarios.length; i++) {
+            let horario = horarios[i].horarios
+
+            for (let i = 0; i < horario.length; i++) {
+              if (horario[i].troca || (forcar && !horario[i].pre)) {
+                if (horario[i].disciplina === troca.disciplina) {
+                  if (troca.turma !== horario[i].turma) {
+                    // inverte
+                    let x = Object.assign({}, troca)
+                    troca = Object.assign({}, horario[i])
+                    horario[i] = Object.assign({}, x)
+
+                    let batidas = bater(horario, i)
+                    if (batidas > 0) {
+                      // desfaz
+                      let x = Object.assign({}, troca)
+                      troca = Object.assign({}, horario[i])
+                      horario[i] = Object.assign({}, x)
+                    } else {
+                      // console.log('trocou')
+                      troca.troca = false
+                      horario[i].troca = false
+                      trocas++
+                      trocou = true
+                      break
+                    }
+                  }
+                }
+              }
+            }
+
+            if (trocou) {
+              break
+            }
+          }
+
+          if (trocou) {
+            break
+          }
+        }
+      }
+
+      if (forcar && trocou) {
+        break
+      }
+    }
+
+    if (trocas > 0) {
+      if (trocas > trocado) {
+        // repete
+        checar(true, trocas, forcar, n + 1)
+      } else {
+        // inverte ordem de alunos
+        inverte(n)
+      }
+    } else {
+      if (!forcar) {
+        checar(true, 0, true, n + 1)
+      } else {
+        inverte(n)
+      }
+    }
+  }
+}
+checar(true, 0, false, 0)
+
+function inverte (n) {
+  // inverte ordem de alunos
+  for (let i = 0; i < horarios.length; i++) {
+    let x = Math.floor(Math.random() * (horarios.length - 1))
+    let y = Math.floor(Math.random() * (horarios.length - 1))
+    let w = Object.assign({}, horarios[x])
+    horarios[x] = Object.assign({}, horarios[y])
+    horarios[y] = Object.assign({}, w)
+  }
+  checar(true, 0, false, n + 1)
 }
 
-console.log(horarios)
+// console.log(horarios)
