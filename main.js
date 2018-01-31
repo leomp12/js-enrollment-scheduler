@@ -96,7 +96,7 @@ let alunos = [
       'Andre Ribeiro': '',
       'Alessandra de Siqueira': '',
       'Thais Vianney': '',
-      'Isadora Estevam': '',
+      'Luciana Penna': '',
       'Maria Clara Chaves': '',
       'Thulio Magalhaes': '',
       'Lauro Silva': '',
@@ -153,7 +153,7 @@ let alunos = [
   {
     'disciplina': 'Reumato',
     'alunos': {
-      'Luciana Penna': '',
+      'Isadora Estevam': '',
       'Ludmila Almeida': '',
       'Carolina Milan': '',
       'Gabriela Abreu': 'B',
@@ -761,6 +761,21 @@ let locais = [
     'minutos': 50
   },
   {
+    'de': '2',
+    'para': '1',
+    'minutos': 50
+  },
+  {
+    'de': '2',
+    'para': '3',
+    'minutos': 50
+  },
+  {
+    'de': '2',
+    'para': '4',
+    'minutos': 50
+  },
+  {
     'de': '3',
     'para': '1',
     'minutos': 50
@@ -909,6 +924,7 @@ for (let i = 0; i < alunos.length; i++) {
     }
   }
 }
+// console.log(disciplinas)
 
 function bater (horario, i) {
   let batidas = 0
@@ -994,9 +1010,20 @@ function bater (horario, i) {
   return batidas
 }
 
-// console.log(horarios)
-// checa horarions batendo
-function checar (trocar, trocado, forcar, n) {
+let n = 0
+let batidas = 10000
+let antes
+let parado = 0
+let piorando = 0
+let melhor = {}
+let menor = batidas
+do {
+  n++
+  console.log(1)
+  antes = batidas
+  batidas = 0
+
+  // checa horarions batendo
   // reset
   for (let i = 0; i < horarios.length; i++) {
     let horario = horarios[i].horarios
@@ -1007,7 +1034,6 @@ function checar (trocar, trocado, forcar, n) {
     }
   }
 
-  let batidas = 0
   for (let i = 0; i < horarios.length; i++) {
     let horario = horarios[i].horarios
 
@@ -1016,16 +1042,31 @@ function checar (trocar, trocado, forcar, n) {
     }
   }
 
+  if (antes < batidas) {
+    // desfaz
+    piorando++
+    if (piorando > 1) {
+      // console.log(3)
+      horarios = melhor
+      piorando = 0
+      continue
+    }
+  } else {
+    if (menor > batidas) {
+      menor = batidas
+    }
+    melhor = Object.assign([], horarios)
+  }
+
   // console.log(batidas)
   if (batidas === 0) {
     console.log('FIM')
-    console.log(horarios)
-    return
+    log()
+    break
   } else if (batidas > 300) {
     console.log('RUIM')
-    console.log(batidas)
-    console.log(horarios)
-    return
+    log()
+    break
   }
 
   for (let i = 0; i < horarios.length; i++) {
@@ -1048,50 +1089,66 @@ function checar (trocar, trocado, forcar, n) {
     }
   }
 
-  if (trocar !== false) {
-    if (n > 1000) {
-      console.log('LIMITE')
-      console.log(batidas)
-      for (let i = 0; i < horarios.length; i++) {
-        console.log(horarios[i].nome)
-        console.log(JSON.stringify(horarios[i].horarios, null, 2))
-      }
-      return
-    }
+  if (n > 20000) {
+    console.log('LIMITE')
+    log()
+    break
+  }
 
-    // tenta trocas
-    let trocas = 0
-    for (let i = 0; i < horarios.length; i++) {
-      let horario = horarios[i].horarios
-      let trocou = false
+  // tenta trocas
+  let trocas = 0
+  for (let i = 0; i < horarios.length; i++) {
+    let horario = horarios[i].horarios
 
-      for (let i = 0; i < horario.length; i++) {
-        if (horario[i].troca) {
-          let troca = horario[i]
+    for (let i = 0; i < horario.length; i++) {
+      if (horario[i].troca) {
+        let troca = horario
+        let j = i
 
+        let trocou = false
+        let forcar = false
+
+        do {
           // procura outra turma
           for (let i = 0; i < horarios.length; i++) {
             let horario = horarios[i].horarios
 
             for (let i = 0; i < horario.length; i++) {
               if (horario[i].troca || (forcar && !horario[i].pre)) {
-                if (horario[i].disciplina === troca.disciplina) {
-                  if (troca.turma !== horario[i].turma) {
+                if (horario[i].disciplina === troca[j].disciplina) {
+                  if (troca[j].turma !== horario[i].turma) {
+                    // conta batidas antes da troca para conferir depois
+                    let y = bater(horario, i)
+                    let batidas = y + bater(troca, j)
+
                     // inverte
-                    let x = Object.assign({}, troca)
-                    troca = Object.assign({}, horario[i])
+                    let x = Object.assign({}, troca[j])
+                    troca[j] = Object.assign({}, horario[i])
                     horario[i] = Object.assign({}, x)
 
-                    let batidas = bater(horario, i)
-                    if (batidas > 0) {
+                    // verifica e compara batidas apos troca
+                    if (forcar) {
+                      if (parado > 5000) {
+                        console.log('LOOP INFINITO')
+                        log()
+                      } else if (parado > 5) {
+                        // console.log(2)
+                        // forca a troca
+                        batidas = 10000
+                        parado = 0
+                      }
+                    }
+                    if (batidas < bater(horario, i) + bater(troca, j)) {
                       // desfaz
-                      let x = Object.assign({}, troca)
-                      troca = Object.assign({}, horario[i])
+                      let x = Object.assign({}, troca[j])
+                      troca[j] = Object.assign({}, horario[i])
                       horario[i] = Object.assign({}, x)
                     } else {
                       // console.log('trocou')
-                      troca.troca = false
-                      horario[i].troca = false
+                      troca[j].troca = false
+                      for (let i = 0; i < horario.length; i++) {
+                        horario[i].troca = false
+                      }
                       trocas++
                       trocou = true
                       break
@@ -1106,46 +1163,38 @@ function checar (trocar, trocado, forcar, n) {
             }
           }
 
-          if (trocou) {
-            break
+          if (forcar) {
+            forcar = false
+          } else if (!trocou) {
+            forcar = true
           }
-        }
-      }
+        } while (forcar === true)
 
-      if (forcar && trocou) {
         break
       }
     }
+  }
 
-    if (trocas > 0) {
-      if (trocas > trocado) {
-        // repete
-        checar(true, trocas, forcar, n + 1)
-      } else {
-        // inverte ordem de alunos
-        inverte(n)
-      }
-    } else {
-      if (!forcar) {
-        checar(true, 0, true, n + 1)
-      } else {
-        inverte(n)
-      }
+  if (trocas === 0 || batidas >= antes) {
+    parado++
+    // inverte ordem de alunos
+    for (let i = 0; i < horarios.length; i++) {
+      let x = Math.floor(Math.random() * (horarios.length - 1))
+      let y = Math.floor(Math.random() * (horarios.length - 1))
+      let w = Object.assign({}, horarios[x])
+      horarios[x] = Object.assign({}, horarios[y])
+      horarios[y] = Object.assign({}, w)
     }
   }
-}
-checar(true, 0, false, 0)
+} while (batidas > 0)
 
-function inverte (n) {
-  // inverte ordem de alunos
+function log () {
   for (let i = 0; i < horarios.length; i++) {
-    let x = Math.floor(Math.random() * (horarios.length - 1))
-    let y = Math.floor(Math.random() * (horarios.length - 1))
-    let w = Object.assign({}, horarios[x])
-    horarios[x] = Object.assign({}, horarios[y])
-    horarios[y] = Object.assign({}, w)
+    console.log(horarios[i].nome)
+    console.log(JSON.stringify(horarios[i].horarios, null, 2))
   }
-  checar(true, 0, false, n + 1)
+  console.log(batidas)
+  console.log(menor)
 }
 
 // console.log(horarios)
