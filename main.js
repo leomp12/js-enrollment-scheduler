@@ -47,7 +47,7 @@ let alunos = [
     'disciplina': 'Geriatria',
     'alunos': {
       'Ludmila Almeida': '',
-      'Gabriela Abreu': 'C',
+      'Gabriela Abreu': '',
       'Lidia Assis': '',
       'Mariana Lis': '',
       'Kamilla Emerencio': '',
@@ -71,8 +71,8 @@ let alunos = [
       'Mariana Couto': '',
       'Luisa Valerio': '',
       'Rui Guilherme': '',
-      'Leonardo Tavares': 'C',
-      'Luane Vargas': 'C',
+      'Leonardo Tavares': '',
+      'Luane Vargas': '',
       'Criskelem Reis': '',
       'Ana Cristina Lobato': '',
       'Camila Magalhaes': '',
@@ -122,7 +122,7 @@ let alunos = [
       'Luane Vargas': '',
       'Bruna Moreira': '',
       'Criskelem Reis': '',
-      'Ana Cristina Lobato': 'A',
+      'Ana Cristina Lobato': '',
       'Camila Magalhaes': '',
       'Patricia Pedra': '',
       'Debora Teixeira': '',
@@ -134,7 +134,7 @@ let alunos = [
     'alunos': {
       'Junia Andrade': '',
       'Maria Clara Gontijo': '',
-      'Laura Alvares': 'A',
+      'Laura Alvares': '',
       'Andre Ribeiro': '',
       'Lais Pascoal': '',
       'Alessandra de Siqueira': '',
@@ -156,7 +156,7 @@ let alunos = [
       'Isadora Estevam': '',
       'Ludmila Almeida': '',
       'Carolina Milan': '',
-      'Gabriela Abreu': 'B',
+      'Gabriela Abreu': '',
       'Lidia Assis': '',
       'Mariana Lis': '',
       'Laura Alvares': '',
@@ -166,7 +166,7 @@ let alunos = [
       'Thais Vianney': '',
       'Julia Wanderley': '',
       'Luisa Valerio': '',
-      'Leonardo Tavares': 'B',
+      'Leonardo Tavares': '',
       'Bruna Moreira': '',
       'Criskelem Reis': ''
     }
@@ -193,7 +193,7 @@ let alunos = [
       'Clara Castro': '',
       'Julia Gomes': '',
       'Debora Teixeira': '',
-      'Luciana Penna': 'G',
+      'Luciana Penna': '',
       'Isadora Estevam': '',
       'Lauro Silva': '',
       'Andre Ribeiro': '',
@@ -214,7 +214,7 @@ let alunos = [
       'Thulio Magalhaes': '',
       'Joao Guilherme': '',
       'Alessandra de Siqueira': '',
-      'Gabriela Abreu': 'G',
+      'Gabriela Abreu': '',
       'Carolina Milan': '',
       'Ludmila Almeida': '',
       'Lidia Assis': '',
@@ -243,7 +243,7 @@ let alunos = [
       'Clara Castro': '',
       'Julia Gomes': '',
       'Debora Teixeira': '',
-      'Luciana Penna': 'E',
+      'Luciana Penna': '',
       'Isadora Estevam': '',
       'Lauro Silva': '',
       'Andre Ribeiro': '',
@@ -252,7 +252,7 @@ let alunos = [
       'Isabela Braun': '',
       'Melissa Oliveira': '',
       'Junia Andrade': '',
-      'Luane Vargas': 'B',
+      'Luane Vargas': '',
       'Lucas Campos': '',
       'Vanessa Souza': '',
       'Bruna Moreira': '',
@@ -302,7 +302,7 @@ let alunos = [
       'Isabela Braun': '',
       'Melissa Oliveira': '',
       'Junia Andrade': '',
-      'Luane Vargas': 'B',
+      'Luane Vargas': '',
       'Lucas Campos': '',
       'Vanessa Souza': '',
       'Bruna Moreira': '',
@@ -853,78 +853,81 @@ let adiciona = function (nome, disciplina, preferencia) {
   disciplina.num++
 }
 
-// joga alunos nas disciplinas
-for (let i = 0; i < alunos.length; i++) {
-  let aluno = alunos[i]
-  let turmas = []
+function comeca () {
+  // joga alunos nas disciplinas
+  for (let i = 0; i < alunos.length; i++) {
+    let aluno = alunos[i]
+    let turmas = []
 
-  // separa todas as turmas da disciplina
-  for (let i = 0; i < disciplinas.length; i++) {
-    let disciplina = disciplinas[i]
-    if (aluno.disciplina === disciplina.disciplina) {
-      turmas.push(i)
-    }
-  }
-
-  if (turmas.length === 0) {
-    throw new Error('disciplina invalida ' + aluno.disciplina)
-  } else {
-    // preferencias primeiro
-    for (let nome in aluno.alunos) {
-      let turma = aluno.alunos[nome]
-      if (turma !== '') {
-        // buscar turma selecionada
-        let achei = false
-
-        for (let i = 0; i < turmas.length; i++) {
-          let disciplina = disciplinas[turmas[i]]
-          if (turma === disciplina.turma) {
-            adiciona(nome, disciplina, true)
-
-            achei = true
-            break
-          }
-        }
-
-        if (!achei) {
-          throw new Error('turma invalida ' + turma + ', aluno ' + nome)
-        }
+    // separa todas as turmas da disciplina
+    for (let i = 0; i < disciplinas.length; i++) {
+      let disciplina = disciplinas[i]
+      if (aluno.disciplina === disciplina.disciplina) {
+        turmas.push(i)
       }
     }
 
-    // outros alunos
-    for (let nome in aluno.alunos) {
-      let turma = aluno.alunos[nome]
-      if (turma === '') {
-        for (let i = 0; i < turmas.length; i++) {
-          let disciplina = disciplinas[turmas[i]]
-          if (disciplina.num < disciplina.min) {
-            adiciona(nome, disciplina, false)
-            break
-          } else if (disciplina.num < disciplina.max) {
-            // checa se alguma turma esta vazia
-            let achei = false
+    if (turmas.length === 0) {
+      throw new Error('disciplina invalida ' + aluno.disciplina)
+    } else {
+      // preferencias primeiro
+      for (let nome in aluno.alunos) {
+        let turma = aluno.alunos[nome]
+        if (turma !== '') {
+          // buscar turma selecionada
+          let achei = false
 
-            for (let i = 0; i < turmas.length; i++) {
-              let disciplina = disciplinas[turmas[i]]
-              if (disciplina.num < disciplina.min) {
-                adiciona(nome, disciplina, false)
-                achei = true
-                break
-              }
+          for (let i = 0; i < turmas.length; i++) {
+            let disciplina = disciplinas[turmas[i]]
+            if (turma === disciplina.turma) {
+              adiciona(nome, disciplina, true)
+
+              achei = true
+              break
             }
+          }
 
-            if (!achei) {
+          if (!achei) {
+            throw new Error('turma invalida ' + turma + ', aluno ' + nome)
+          }
+        }
+      }
+
+      // outros alunos
+      for (let nome in aluno.alunos) {
+        let turma = aluno.alunos[nome]
+        if (turma === '') {
+          for (let i = 0; i < turmas.length; i++) {
+            let disciplina = disciplinas[turmas[i]]
+            if (disciplina.num < disciplina.min) {
               adiciona(nome, disciplina, false)
+              break
+            } else if (disciplina.num < disciplina.max) {
+              // checa se alguma turma esta vazia
+              let achei = false
+
+              for (let i = 0; i < turmas.length; i++) {
+                let disciplina = disciplinas[turmas[i]]
+                if (disciplina.num < disciplina.min) {
+                  adiciona(nome, disciplina, false)
+                  achei = true
+                  break
+                }
+              }
+
+              if (!achei) {
+                adiciona(nome, disciplina, false)
+              }
+              break
             }
-            break
           }
         }
       }
     }
   }
+  // console.log(disciplinas)
 }
-// console.log(disciplinas)
+comeca()
 
 function bater (horario, i) {
   let batidas = 0
@@ -1014,9 +1017,8 @@ let n = 0
 let batidas = 10000
 let antes
 let parado = 0
-let piorando = 0
-let melhor = {}
 let menor = batidas
+let melhor = []
 do {
   n++
   console.log(1)
@@ -1042,22 +1044,6 @@ do {
     }
   }
 
-  if (antes < batidas) {
-    // desfaz
-    piorando++
-    if (piorando > 1) {
-      // console.log(3)
-      horarios = melhor
-      piorando = 0
-      continue
-    }
-  } else {
-    if (menor > batidas) {
-      menor = batidas
-    }
-    melhor = Object.assign([], horarios)
-  }
-
   // console.log(batidas)
   if (batidas === 0) {
     console.log('FIM')
@@ -1067,6 +1053,10 @@ do {
     console.log('RUIM')
     log()
     break
+  }
+  if (menor > batidas) {
+    menor = batidas
+    melhor = Object.assign([], horarios)
   }
 
   for (let i = 0; i < horarios.length; i++) {
@@ -1089,7 +1079,7 @@ do {
     }
   }
 
-  if (n > 20000) {
+  if (n > 200000) {
     console.log('LIMITE')
     log()
     break
@@ -1127,17 +1117,6 @@ do {
                     horario[i] = Object.assign({}, x)
 
                     // verifica e compara batidas apos troca
-                    if (forcar) {
-                      if (parado > 5000) {
-                        console.log('LOOP INFINITO')
-                        log()
-                      } else if (parado > 5) {
-                        // console.log(2)
-                        // forca a troca
-                        batidas = 10000
-                        parado = 0
-                      }
-                    }
                     if (batidas < bater(horario, i) + bater(troca, j)) {
                       // desfaz
                       let x = Object.assign({}, troca[j])
@@ -1176,7 +1155,6 @@ do {
   }
 
   if (trocas === 0 || batidas >= antes) {
-    parado++
     // inverte ordem de alunos
     for (let i = 0; i < horarios.length; i++) {
       let x = Math.floor(Math.random() * (horarios.length - 1))
@@ -1185,15 +1163,27 @@ do {
       horarios[x] = Object.assign({}, horarios[y])
       horarios[y] = Object.assign({}, w)
     }
+    parado++
+    if (parado > 100) {
+      // console.log(2)
+      horarios = []
+      for (let i = 0; i < disciplinas.length; i++) {
+        disciplinas[i].num = 0
+      }
+      comeca()
+      parado = 0
+    }
+  } else {
+    parado = 0
   }
 } while (batidas > 0)
 
 function log () {
-  for (let i = 0; i < horarios.length; i++) {
-    console.log(horarios[i].nome)
-    console.log(JSON.stringify(horarios[i].horarios, null, 2))
+  for (let i = 0; i < melhor.length; i++) {
+    console.log(melhor[i].nome)
+    console.log(JSON.stringify(melhor[i].horarios, null, 2))
   }
-  console.log(batidas)
+  // console.log(batidas)
   console.log(menor)
 }
 
